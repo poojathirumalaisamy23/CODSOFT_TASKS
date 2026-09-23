@@ -1,0 +1,33 @@
+capture:
+  interface: "Wi-Fi"
+  bpf_filter: "ip"
+  packet_count: 0
+  promiscuous: true
+
+detection:
+  port_scan:
+    enabled: true
+    unique_ports_threshold: 15
+    time_window_seconds: 5
+    severity: HIGH
+
+  arp_spoof:
+    enabled: true
+    severity: CRITICAL
+
+  dns_tunnel:
+    enabled: true
+    max_subdomain_length: 50
+    entropy_threshold: 3.5
+    severity: MEDIUM
+
+  brute_force:
+    enabled: true
+    attempts_threshold: 10
+    time_window_seconds: 30
+    severity: HIGH
+
+output:
+  log_file: logs/alerts.json
+  pcap_file: logs/capture.pcap
+  console_colors: true
